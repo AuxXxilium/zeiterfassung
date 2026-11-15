@@ -13,8 +13,7 @@ Zeiterfassung, Aufträge und Arbeitsnachweise für Handwerksbetriebe – im Brow
 - [Für den Chef](#für-den-chef)
 - [Für Administratoren](#für-administratoren)
 - [Wie gerechnet wird](#wie-gerechnet-wird)
-- [Auf einem Server einrichten](#auf-einem-server-einrichten)
-- [Aktualisieren, Sichern, Hilfe](#aktualisieren-sichern-hilfe)
+- [Installation](#installation) (eigene Anleitung: [INSTALLATION.md](INSTALLATION.md))
 
 ---
 
@@ -28,7 +27,7 @@ Zeiterfassung, Aufträge und Arbeitsnachweise für Handwerksbetriebe – im Brow
 | **Arbeitsnachweise** | Was wurde wo von wem wie lange gemacht – mit Material, Fotos und Unterschrift, als PDF oder per E-Mail |
 | **Kunden** | Kundenkartei mit Adresse, Telefon und E-Mail, füllt sich von selbst |
 | **Lager** | Bestand und Mindestmengen, Bestellliste als PDF |
-| **Wartungen** | Wann war die letzte Wartung beim Kunden, wann ist die nächste fällig |
+| **Listen** (z. B. Wartungen) | Eigene Listen nach Schlagworten: wann war z. B. die letzte Wartung beim Kunden, wann ist die nächste fällig |
 | **Zeiterfassung** | Der Monat Tag für Tag, mit Urlaub, Krank und Feiertagen |
 | **Überstundenkonto** | Stand und Verlauf der Überstunden |
 | **Monatsbericht** | Die Arbeitszeit des Monats als PDF für das Lohnbüro (Aufbau wie die DATEV-Vorlage) |
@@ -123,11 +122,24 @@ Bestand jedes Materials mit Mindestmenge. Material aus den Arbeitsnachweisen wir
 
 ![Lager](bilder/lager.png)
 
-### Wartungen
+### Listen (z. B. Wartungen)
 
-Alle Arbeitsnachweise, in denen „Wartung“ vorkommt. Die Ansicht **Je Kunde** zeigt die letzte Wartung und wann die nächste fällig ist (nach 12 Monaten): **gelb** heißt bald fällig, **rot** heißt überfällig. Der Administrator kann weitere solche Listen mit eigenen Stichwörtern anlegen.
+Listen sammeln automatisch alle Arbeitsnachweise, in denen bestimmte **Schlagworte** vorkommen (in der Bezeichnung, der Bemerkung oder bei den durchgeführten Arbeiten). Welche Listen es gibt, legt der Administrator fest. Jede Liste steht mit ihrem eigenen Namen im Menü unter *Aufträge*, z. B.:
 
-![Wartungen](bilder/wartungen.png)
+| Liste | Schlagworte | Fällig nach |
+|---|---|---|
+| Wartungen (voreingestellt) | Wartung | 12 Monaten |
+| Dichtheitsprüfung | Dichtheitsprüfung, Druckprobe | 60 Monaten |
+| Notdienst | Notdienst, Rohrbruch | keine Fälligkeit |
+
+Jede Liste hat zwei Ansichten:
+
+- **Alle Einträge**: alle passenden Arbeitsnachweise mit Datum, Kunde, Adresse, Arbeit und Mitarbeiter, mit Suche und Sortierung.
+- **Je Kunde (letzte)**: der letzte Eintrag je Kunde und, wenn die Liste eine Fälligkeit hat, wann der nächste fällig ist. **Gelb** heißt bald fällig (in den nächsten 30 Tagen), **rot** heißt überfällig. So sehen Sie z. B. auf einen Blick, bei welchen Kunden die nächste Wartung ansteht.
+
+Ein Tipp auf einen Eintrag öffnet den Arbeitsnachweis.
+
+![Liste „Wartungen“, Ansicht je Kunde](bilder/wartungen.png)
 
 ### Zeiterfassung
 
@@ -186,7 +198,7 @@ Administratoren sehen alles und haben unten im Menü den Bereich **Verwaltung**.
 
 ### Erster Start
 
-1. Mit dem Benutzer **admin** und dem Startpasswort anmelden. Das Startpasswort wird bei der Einrichtung angezeigt (siehe [unten](#auf-einem-server-einrichten)).
+1. Mit dem Benutzer **admin** und dem Startpasswort anmelden. Das Startpasswort wird bei der Einrichtung angezeigt (siehe [Installationsanleitung](INSTALLATION.md)).
 2. Unter **Mein Profil** das Passwort ändern und den eigenen Namen eintragen.
 3. Unter **Einstellungen → Allgemein** Firmenname, Anschrift, Telefon, E-Mail und Logo eintragen. Das erscheint auf Arbeitsnachweisen und Berichten.
 4. Den **E-Mail-Versand** einrichten (Einstellungen → Allgemein). Die Zugangsdaten bekommen Sie von Ihrem E-Mail-Anbieter. Mit „Test-Mail“ prüfen Sie, ob es klappt.
@@ -198,7 +210,7 @@ Administratoren sehen alles und haben unten im Menü den Bereich **Verwaltung**.
 Hier legen Sie Mitarbeiter an und bearbeiten sie: Benutzername, Name, Personalnummer, E-Mail und Startpasswort. Außerdem:
 
 - **Rolle**: Mitarbeiter, Chef oder Administrator
-- **Sichtbare Bereiche**: welche Seiten der Mitarbeiter im Menü hat (z. B. Wartungen nur für Servicemonteure, Lager nur fürs Lager)
+- **Sichtbare Bereiche**: welche Seiten der Mitarbeiter im Menü hat. Jede Liste ist ein eigener Bereich, z. B. „Wartungen“ nur für Servicemonteure oder „Lager“ nur fürs Lager.
 - **Urlaub**: Anspruch pro Jahr und Rest aus dem Vorjahr
 - **Ohne feste Arbeitszeiten**: für Aushilfen ohne Sollzeit
 - **Überstunden zählen ab** einem bestimmten Datum, mit Übertrag aus der Zeit davor
@@ -213,7 +225,7 @@ Hier legen Sie Mitarbeiter an und bearbeiten sie: Benutzername, Name, Personalnu
 | **Allgemein** | Firma (Name, Zusatzzeile, Anschrift, Telefon, E-Mail, Logo), Stempeluhr (Pause-Taste, automatisch ausstempeln nach … Stunden, Standort, früher Kommen), E-Mail-Versand und Empfänger, Monatsbericht |
 | **Arbeitszeit & Feiertage** | Normalarbeitszeit je Wochentag mit Beginn, Ende und Pause, jeweils **gültig ab** einem Datum (frühere Monate bleiben unverändert), Heiligabend und Silvester (voll, halb oder frei), eigene freie Tage, Bundesland für die Feiertage |
 | **Arbeitsnachweis** | Aussehen des PDFs (Layout und Farbe) mit Vorschau |
-| **Listen** | Listen wie „Wartungen“ mit eigenen Stichwörtern |
+| **Listen** | Eigene Listen anlegen, ändern oder entfernen (bis zu 20): **Name** (so steht die Liste im Menü), **Schlagworte** (mit Komma getrennt, bis zu 10) und **Fällig nach** wie vielen Monaten (0 = keine Fälligkeit). „Wartungen“ ist voreingestellt. Eine neue Liste danach unter *Mitarbeiter* für die gewünschten Personen freischalten. |
 | **Material** | Gemeinsamer Materialkatalog für die Arbeitsnachweise |
 | **E-Mail-Protokoll** | Welche E-Mails wann an wen gingen |
 | **API** | Zugang für Apps und Programme ein- oder ausschalten |
@@ -248,287 +260,9 @@ Jede Änderung wird festgehalten: wann, wer und was vorher und nachher drinstand
 
 ---
 
-## Auf einem Server einrichten
+## Installation
 
-Die App ist **eine einzige Programmdatei** für Linux-Server. Sie bringt alles mit: Datenbank, PDF-Erzeugung, E-Mail-Versand und die Oberfläche. Auf dem Server muss sonst nichts installiert werden.
-
-Davor sitzt ein **Webserver** (nginx oder Apache), der die Adresse wie `https://zeiten.ihre-firma.de` bereitstellt und an die App weiterreicht:
-
-```
-Browser / Handy ──HTTPS──▶ nginx oder Apache ──▶ Zeiterfassung (auf dem Server, Port 3010)
-                                                   └─ Daten: Datenbank und Fotos
-```
-
-**Sie brauchen:**
-
-- einen Linux-Server (z. B. Ubuntu oder Debian) mit Zugang per SSH als Administrator (root bzw. `sudo`)
-- eine eigene Adresse (Domain oder Subdomain, z. B. `zeiten.ihre-firma.de`), die auf den Server zeigt
-- nginx oder Apache als Webserver (oder Plesk, siehe unten)
-
-> **HTTPS ist Pflicht.** Ohne die verschlüsselte Verbindung erlauben Browser weder Standort noch Kamera, und die App lässt sich nicht auf dem Handy installieren. Das kostenlose Zertifikat von Let's Encrypt reicht völlig.
-
-In den folgenden Befehlen ersetzen Sie `zeiten.ihre-firma.de` durch Ihre Adresse.
-
-### Schritt 1: Herunterladen und installieren
-
-Per SSH auf dem Server anmelden und diese Befehle nacheinander eingeben:
-
-```bash
-cd /tmp
-wget https://github.com/AuxXxilium/zeiterfassung/releases/latest/download/zeiterfassung-linux-amd64.tar.gz
-tar xzf zeiterfassung-linux-amd64.tar.gz
-cd zeiterfassung-*-linux-amd64
-sudo ./install.sh
-```
-
-> Für einen Server mit ARM-Prozessor (z. B. Raspberry Pi) nehmen Sie `zeiterfassung-linux-arm64.tar.gz` und `cd zeiterfassung-*-linux-arm64`.
-
-Das Installationsprogramm
-
-- legt die App nach `/opt/zeiterfassung` und die Daten nach `/opt/zeiterfassung/data`,
-- richtet sie als **Dienst** ein, der nach jedem Neustart des Servers von selbst startet,
-- zeigt am Ende das **Startpasswort für den Benutzer `admin`** an. **Bitte notieren!**
-
-Die App läuft jetzt auf dem Server unter Port **3010** und ist von außen noch nicht erreichbar. Das übernimmt der Webserver im nächsten Schritt.
-
-<details>
-<summary>Anderer Ordner oder anderer Port?</summary>
-
-```bash
-sudo ./install.sh --dir /srv/zeiterfassung --port 3020
-```
-
-Wenn Sie einen anderen Port wählen, ändern Sie die `3010` in der Webserver-Einstellung unten entsprechend.
-</details>
-
-### Schritt 2a: Webserver nginx
-
-Die passende Vorlage liegt schon im entpackten Ordner (`nginx.conf`).
-
-```bash
-# 1. Zertifikat holen (nginx wird dafür kurz angehalten)
-sudo certbot certonly --standalone -d zeiten.ihre-firma.de \
-  --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx"
-
-# 2. Vorlage übernehmen und die Adresse eintragen
-sudo cp nginx.conf /etc/nginx/sites-available/zeiterfassung
-sudo sed -i 's/zeiten.example.de/zeiten.ihre-firma.de/g' /etc/nginx/sites-available/zeiterfassung
-sudo ln -s /etc/nginx/sites-available/zeiterfassung /etc/nginx/sites-enabled/
-
-# 3. Prüfen und übernehmen
-sudo nginx -t && sudo systemctl reload nginx
-```
-
-<details>
-<summary>Inhalt der nginx-Vorlage</summary>
-
-```nginx
-upstream zeiterfassung {
-    server 127.0.0.1:3010;
-    keepalive 16;
-}
-
-server {
-    listen 80;
-    listen [::]:80;
-    server_name zeiten.ihre-firma.de;
-    location / { return 301 https://$host$request_uri; }
-}
-
-server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    server_name zeiten.ihre-firma.de;
-
-    ssl_certificate     /etc/letsencrypt/live/zeiten.ihre-firma.de/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/zeiten.ihre-firma.de/privkey.pem;
-
-    client_max_body_size 20m;
-    add_header Strict-Transport-Security "max-age=31536000" always;
-
-    location / {
-        proxy_pass http://zeiterfassung;
-        proxy_http_version 1.1;
-        proxy_set_header Connection "";
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_read_timeout 60s;
-    }
-}
-```
-</details>
-
-### Schritt 2b: Webserver Apache
-
-Die passende Vorlage liegt ebenfalls im entpackten Ordner (`apache.conf`).
-
-```bash
-# 1. Zertifikat holen (Apache wird dafür kurz angehalten)
-sudo certbot certonly --standalone -d zeiten.ihre-firma.de \
-  --pre-hook "systemctl stop apache2" --post-hook "systemctl start apache2"
-
-# 2. Benötigte Apache-Module einschalten
-sudo a2enmod proxy proxy_http headers ssl
-
-# 3. Vorlage übernehmen und die Adresse eintragen
-sudo cp apache.conf /etc/apache2/sites-available/zeiterfassung.conf
-sudo sed -i 's/zeiten.example.de/zeiten.ihre-firma.de/g' /etc/apache2/sites-available/zeiterfassung.conf
-sudo a2ensite zeiterfassung
-
-# 4. Prüfen und übernehmen
-sudo apachectl configtest && sudo systemctl reload apache2
-```
-
-<details>
-<summary>Inhalt der Apache-Vorlage</summary>
-
-```apache
-<VirtualHost *:80>
-    ServerName zeiten.ihre-firma.de
-    Redirect permanent / https://zeiten.ihre-firma.de/
-</VirtualHost>
-
-<VirtualHost *:443>
-    ServerName zeiten.ihre-firma.de
-
-    SSLEngine on
-    SSLCertificateFile    /etc/letsencrypt/live/zeiten.ihre-firma.de/fullchain.pem
-    SSLCertificateKeyFile /etc/letsencrypt/live/zeiten.ihre-firma.de/privkey.pem
-
-    LimitRequestBody 20971520
-    Header always set Strict-Transport-Security "max-age=31536000"
-
-    ProxyPreserveHost On
-    ProxyRequests Off
-    ProxyTimeout 60
-    RequestHeader set X-Forwarded-Proto "https"
-    ProxyPass        / http://127.0.0.1:3010/
-    ProxyPassReverse / http://127.0.0.1:3010/
-</VirtualHost>
-```
-</details>
-
-> `certbot` (für das kostenlose Let's-Encrypt-Zertifikat) installieren Sie bei Bedarf mit `sudo apt install certbot`. Das Zertifikat wird danach automatisch verlängert. Der Webserver ist dabei jeweils für wenige Sekunden angehalten.
-
-### Schritt 2c: Plesk
-
-Mit Plesk geht der Webserver-Teil über die Oberfläche:
-
-1. Das Paket per Dateimanager oder SFTP ins **Basisverzeichnis** des Abonnements hochladen (z. B. `/var/www/vhosts/ihre-firma.de/`), **nicht** in `httpdocs`. Dann per SSH entpacken und installieren:
-
-   ```bash
-   cd /var/www/vhosts/ihre-firma.de
-   tar xzf zeiterfassung-linux-amd64.tar.gz
-   cd zeiterfassung-*-linux-amd64
-   sudo ./install.sh --dir /var/www/vhosts/ihre-firma.de/zeiterfassung --port 3010
-   ```
-
-   So liegen die Daten im Abonnement und kommen mit in die Plesk-Sicherung.
-2. In Plesk eine Subdomain anlegen (z. B. `zeiten.ihre-firma.de`) und unter **SSL/TLS-Zertifikate** Let's Encrypt einschalten, dazu die Weiterleitung auf HTTPS.
-3. **Websites & Domains → Subdomain → Apache & nginx-Einstellungen**:
-   - **„Statische Dateien direkt von nginx bereitstellen“ ausschalten** (sonst bleibt die Seite weiß).
-   - Unter **„Zusätzliche nginx-Anweisungen“** einfügen:
-
-     ```nginx
-     location ~ / {
-         client_max_body_size 20m;
-         proxy_pass http://127.0.0.1:3010;
-         proxy_http_version 1.1;
-         proxy_set_header Connection "";
-         proxy_set_header Host $host;
-         proxy_set_header X-Real-IP $remote_addr;
-         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-         proxy_set_header X-Forwarded-Proto $scheme;
-         proxy_read_timeout 60s;
-     }
-     ```
-
-<details>
-<summary>Plesk ohne root-Zugang (über „Geplante Aufgaben“)</summary>
-
-Wenn Sie in Plesk keinen root-Zugang haben, startet ein kleines Skript die App und hält sie am Laufen.
-
-1. Aus dem Paket `zeiterfassung` und `plesk-start.sh` in einen Ordner des Webspace hochladen, z. B. `/zeiterfassung`. Dazu eine Datei `zeiterfassung.env` mit diesem Inhalt anlegen:
-
-   ```
-   PORT=3010
-   TRUST_PROXY=1
-   COOKIE_SECURE=1
-   ADMIN_PASSWORD=ein-sicheres-startpasswort
-   ```
-2. Unter **Websites & Domains → Geplante Aufgaben** eine Aufgabe anlegen: *Befehl ausführen* `/zeiterfassung/plesk-start.sh`, Zeitplan *Cron-Stil* `* * * * *` (jede Minute). Einmal auf **Jetzt ausführen** klicken.
-3. Die nginx-Einstellungen wie oben in Schritt 3.
-
-Das Skript prüft jede Minute, ob die App läuft, und startet sie bei Bedarf neu, z. B. nach einem Neustart des Servers.
-</details>
-
-### Schritt 3: Anmelden
-
-`https://zeiten.ihre-firma.de` im Browser öffnen und mit **admin** und dem Startpasswort anmelden. Weiter geht es mit [Erster Start](#erster-start).
-
-### E-Mail-Versand
-
-Den E-Mail-Server tragen Sie in der App unter **Einstellungen → Allgemein** ein (Server, Port, Benutzer, Passwort, Absender). Manche Anbieter sperren Verbindungen zu fremden Mailservern. Legen Sie dann ein Postfach beim eigenen Hosting an (z. B. in Plesk) und tragen Sie als Server `localhost`, Port `587` ein.
-
----
-
-## Aktualisieren, Sichern, Hilfe
-
-### Aktualisieren
-
-Neue Versionen finden Sie unter [Releases](https://github.com/AuxXxilium/zeiterfassung/releases). Die Versionsnummer ist das Datum (z. B. `26.11.15` = 15. November 2026). Zum Aktualisieren wiederholen Sie einfach **Schritt 1**:
-
-```bash
-cd /tmp
-wget -O zeiterfassung-linux-amd64.tar.gz https://github.com/AuxXxilium/zeiterfassung/releases/latest/download/zeiterfassung-linux-amd64.tar.gz
-tar xzf zeiterfassung-linux-amd64.tar.gz
-cd zeiterfassung-*-linux-amd64
-sudo ./install.sh
-```
-
-(Mit denselben Angaben wie beim ersten Mal, falls Sie `--dir` oder `--port` benutzt haben.) Die App wird ersetzt und neu gestartet. **Daten und Einstellungen bleiben erhalten.** Danach im Browser einmal neu laden.
-
-Unter Plesk ohne root genügt es, die Datei `zeiterfassung-linux-amd64` aus dem Release neben die alte `zeiterfassung` hochzuladen. Innerhalb einer Minute läuft die neue Version.
-
-Welche Version läuft, steht in der App unter **Einstellungen → Info**.
-
-### Sichern
-
-Alle Daten liegen in **einem Ordner**: `/opt/zeiterfassung/data` (bzw. der bei `--dir` angegebene Ordner plus `/data`). Darin sind die Datenbank `app.db` und die Fotos im Ordner `uploads`. Diesen Ordner regelmäßig sichern, dann ist alles gesichert.
-
-<details>
-<summary>MySQL / MariaDB statt der eingebauten Datenbank</summary>
-
-Die App bringt ihre Datenbank selbst mit. Wer lieber eine MySQL- oder MariaDB-Datenbank verwendet (z. B. eine in Plesk angelegte), trägt diese Zeile in `/etc/zeiterfassung.env` ein und startet die App neu:
-
-```
-DATABASE_URL=mysql://benutzer:passwort@localhost:3306/datenbankname
-```
-
-Bisherige Daten übernehmen (einmalig, App vorher anhalten):
-
-```bash
-sudo systemctl stop zeiterfassung
-sudo -u zeiterfassung /opt/zeiterfassung/zeiterfassung db-copy --env-file /etc/zeiterfassung.env --data /opt/zeiterfassung/data
-sudo systemctl start zeiterfassung
-```
-
-Die Fotos bleiben im Datenordner. Gesichert werden müssen dann die Datenbank **und** dieser Ordner.
-</details>
-
-### Wenn etwas nicht klappt
-
-| Problem | Lösung |
-|---|---|
-| Startpasswort vergessen | Steht in `/etc/zeiterfassung.env` (Zeile `ADMIN_PASSWORD`). Es gilt nur, solange das Passwort in der App noch nicht geändert wurde. |
-| Seite nicht erreichbar | Läuft die App? `sudo systemctl status zeiterfassung`. Neu starten mit `sudo systemctl restart zeiterfassung` |
-| Was ist passiert? | Die Meldungen der App zeigt `journalctl -u zeiterfassung -n 50` |
-| Seite bleibt weiß (Plesk) | „Statische Dateien direkt von nginx bereitstellen“ ausschalten |
-| Standort oder Kamera geht nicht | Die Seite muss über `https://` aufgerufen werden |
-| E-Mails kommen nicht an | Einstellungen → Allgemein → Test-Mail senden; unter *E-Mail-Protokoll* steht der Fehler |
-| Fotos lassen sich nicht hochladen | Im Webserver die Upload-Grenze prüfen (`client_max_body_size 20m` bzw. `LimitRequestBody`) |
+Wie Sie die App auf einem Server einrichten (mit nginx, Apache oder Plesk), aktualisieren und sichern, steht in der **[Installationsanleitung](INSTALLATION.md)**.
 
 ---
 
